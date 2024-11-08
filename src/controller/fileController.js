@@ -1,4 +1,4 @@
-import { createData } from "../services/fileService.js";
+import { createData, getAllData } from "../services/fileService.js";
 
 export const createItem = async (req, res) => {
     try {
@@ -16,5 +16,25 @@ export const createItem = async (req, res) => {
             status: 500,
             error
         })
+    }
+}
+
+
+export const getAllItems = async(req, res) => {
+    try {
+        const data = await getAllData() 
+
+        res.status(200).json({
+            message: 'Data founded successfully',
+            status: 200,
+            data
+        })
+    }catch (error) {
+        res.status(404).json({
+            message: "Data Not Found",
+            status: 404,
+            error
+        })
+
     }
 }

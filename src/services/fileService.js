@@ -16,11 +16,31 @@ export const createFile = async(data) => {
         throw new Error(`Error al crear el archivo: ${err}`)
     });
     } catch (error) {
-        console.error('Error al crear o guardar el archivo:', error)
+        throw new Error(`Error al crear o guardar el archivo:${err}`)
+    }
+}
+
+
+export const readFile = async() => {
+    try {
+        const data = await fs.readFile(dataFilePath, 'utf-8')
+        return JSON.parse(data);
+    }catch (error) {
+        throw new Error(`Error al leer el archivo:${err}`)
+
     }
 }
 
 
 export const createData = async(data) => {
-    await createFile(data)
+    const dataFile = await readFile();
+    const datajson = [...dataFile, data]
+    await createFile(datajson)
+}
+
+//spread oprator
+
+export const getAllData = async() => {
+    const data = await readFile()
+    return data
 }
