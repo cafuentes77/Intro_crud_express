@@ -25,8 +25,8 @@ export const getAllData = async() => {
 
 
 
-export const updateData = async(id) => {
-    const dataFile = await readFile();
+export const updateData = async(id, newData) => {
+    const data = await readFile();
     const indexData = data.findIndex(usuario => usuario.id === id)
 
     if(indexData === -1) throw new Error('no podemos encontrar el dato buscado para actualizar')
@@ -38,4 +38,11 @@ export const updateData = async(id) => {
     await createFile(data)
 
     return oldData
+}
+
+
+export const deleteData = async(id) => {
+    const data = await readFile();
+    const newData = data.filter(usuario => usuario.id !== id);
+    await createFile(newData)
 }
