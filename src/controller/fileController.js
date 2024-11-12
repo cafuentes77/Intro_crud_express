@@ -38,3 +38,23 @@ export const getAllItems = async(req, res) => {
 
     }
 }
+
+export const updateItem = async (req, res) => {
+    try {
+        const id = Number(req.params.id);
+        const data = req.body;
+
+        const modifiedOldData = updateData(id, data);
+        
+        res.status(200).json({
+        message: "Error al obtener id",
+        status: 202,
+        oldData : modifiedOldData,
+        newData
+        });
+    }catch (error) {
+        res.status(202).json({
+
+        })
+    }
+}

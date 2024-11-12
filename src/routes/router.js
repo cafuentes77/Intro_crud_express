@@ -5,5 +5,6 @@ const router = express.Router();
 
 router.post ('/data', createItem)
 router.get ('/data', getAllItems)
+router.put ('/data/:id', updateItem)
 
 export default router
