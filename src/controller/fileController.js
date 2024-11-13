@@ -1,4 +1,4 @@
-import { createData, getAllData, updateData, deleteData} from "../utils/fileUtils.js";
+import { createData, getAllData, updateData, deleteData, getById, getByName} from "../utils/fileUtils.js";
 
 export const createItem = async (req, res) => {
     try {
@@ -36,6 +36,45 @@ export const getAllItems = async(req, res) => {
             error
         })
 
+    }
+}
+
+export const getItemById = async (req, res) => {
+    try {
+        const id = Number(req.params.id)
+        const data = await getById (id)
+        res.status(200).json({
+            message: "Data founded successfully",
+            status: 200,
+            data
+        })
+
+    }catch (error) {
+        res.status(404).json({
+            message: "Data Not Found",
+            status: 404,
+            error
+        })
+
+    }
+}
+
+export const getItemByName = async(req, res) => {
+    try {
+        const name = req.params.name
+        const data = await getByName(name)
+
+        res.status(200).json({
+            message: 'Data found Successfully',
+            status: 200,
+            data
+        })
+    } catch (error) {
+        res.status(404).json({
+            message: "Data not Found",
+            status: 404,
+            error,
+        });
     }
 }
 
